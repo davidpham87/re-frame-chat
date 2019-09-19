@@ -1,0 +1,27 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.",
+  "dependencies": {
+    "create-react-class": "^15.6.3",
+    "highlight.js": "^9.15.10",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-flip-move": "^3.0.3",
+    "react-highlight.js": "^1.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidpham87/re-frame-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidpham87/re-frame-chat/issues"
+  },
+  "homepage": "https://github.com/davidpham87/re-frame-chat#readme"
+}

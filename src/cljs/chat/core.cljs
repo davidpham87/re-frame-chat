@@ -8,19 +8,17 @@
    [chat.config :as config]))
 
 
-
 (defn dev-setup []
   (when config/debug?
     (enable-console-print!)
     (println "dev mode")))
 
-(defn mount-root []
-  (re-frame/clear-subscription-cache!)
+(defn ^:dev/after-load mount-root []
   (reagent/render [views/main-panel]
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
-  (routes/app-routes)
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
+  (re-frame/clear-subscription-cache!)
   (mount-root))

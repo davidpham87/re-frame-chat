@@ -1,11 +1,12 @@
 (defproject chat "0.1.0-SNAPSHOT"
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/clojurescript "1.10.238"]
-                 [reagent "0.7.0"]
-                 [re-frame "0.10.5"]
+                 [reagent "0.9.0-rc1"]
+                 [re-frame "0.11.0-rc1"]
                  [secretary "1.2.3"]]
 
-  :plugins [[lein-cljsbuild "1.1.7"]]
+  :plugins [[cider/cider-nrepl "0.22.3"]
+            [lein-cljsbuild "1.1.7"]]
 
   :min-lein-version "2.5.3"
 
@@ -18,10 +19,10 @@
   :profiles
   {:dev
          {:dependencies [[binaryage/devtools "0.9.10"]
-                         [day8.re-frame/re-frame-10x "0.3.3"]
+                         [day8.re-frame/re-frame-10x "0.4.3"]
                          [day8.re-frame/tracing "0.5.1"]
                          [figwheel-sidecar "0.5.16"]
-                         [cider/piggieback "0.3.1"]]
+                         [cider/piggieback "0.4.1"]]
           :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
           :plugins      [[lein-figwheel "0.5.16"]]}
    :prod {:dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]}}
@@ -50,8 +51,3 @@
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}]})
-
-
-
-
-

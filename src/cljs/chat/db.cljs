@@ -1,4 +1,5 @@
 (ns chat.db)
 
 (def default-db
-  {:name "re-frame"})
+  {:name "re-frame"
+   :user {:username "Me"}})

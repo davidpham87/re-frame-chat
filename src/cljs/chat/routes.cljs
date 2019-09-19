@@ -5,6 +5,7 @@
     [secretary.core :as secretary]
     [goog.events :as gevents]
     [goog.history.EventType :as EventType]
+    [goog.object :as gobj]
     [re-frame.core :as re-frame]
     [chat.events :as events]))
 
@@ -14,10 +15,10 @@
     (gevents/listen
       EventType/NAVIGATE
       (fn [event]
-        (secretary/dispatch! (.-token event))))
+        (secretary/dispatch! (gobj/get event "token"))))
     (.setEnabled true)))
 
-(defn app-routes []
+#_(defn app-routes []
   (secretary/set-config! :prefix "#")
   ;; --------------------
   ;; define routes here
