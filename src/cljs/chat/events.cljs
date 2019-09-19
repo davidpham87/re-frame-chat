@@ -12,8 +12,10 @@
 
 (re-frame/reg-event-fx
   ::initialize-db
-  (fn-traced [_ _]
-    {:db db/default-db}))
+  (fn-traced
+   [_ _]
+   {:db db/default-db
+    :dispatch [::send-message _ "What can you do?" _]}))
 
 (re-frame/reg-event-fx
   ::send-message

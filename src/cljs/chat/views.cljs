@@ -116,7 +116,7 @@
           [:div.message-meta
            [:div.message-user (str "@" user)]
            [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-          [:div {:class "message-text" :style {:background-color (if (= (subs caption 0 2) "<a") "black" "white")}
+          [:div {:class "message-text"
                  :dangerouslySetInnerHTML {:__html caption}}]])]
    [:img {:src image-url :style {:display :block :margin-top 15} :width 280}]])
 
@@ -136,7 +136,7 @@
       [:textarea.input
        {:value @written-text
         :ref (fn [input] (reset! ref input))
-        :autofocus true
+        :autoFocus true
         :on-key-press
         (fn [e]
           (let [value (-> (.. e -target -value))]

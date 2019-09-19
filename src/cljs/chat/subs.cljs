@@ -16,7 +16,7 @@
 (re-frame/reg-sub
   ::messages
   (fn-traced [db [_ id]]
-    (-> db :messages (get id))))
+    (-> db :messages (get id) rest)))
 
 (re-frame/reg-sub
   ::me
