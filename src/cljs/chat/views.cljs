@@ -103,8 +103,8 @@
        [:div.message-meta
         [:div.message-user (str "@" user)]
         [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-       [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]
-       [:video {:style {:margin-top 15} :width 400 :controls true} [:source {:src video-url}]]])]])
+       [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]])
+    [:video {:style {:margin-top 15} :width 400 :controls true} [:source {:src video-url}]]]])
 
 (defmethod message "image"
   [{:keys [items image-url caption avatar-src user time]} _]
@@ -117,8 +117,8 @@
            [:div.message-user (str "@" user)]
            [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
           [:div {:class "message-text"
-                 :dangerouslySetInnerHTML {:__html caption}}]])]
-   [:img {:src image-url :style {:display :block :margin-top 15} :width 280}]])
+                 :dangerouslySetInnerHTML {:__html caption}}]])
+    [:img {:src image-url :style {:display :block :margin-top 15} :width 280}]]])
 
 (def msg (r/atom nil))
 
