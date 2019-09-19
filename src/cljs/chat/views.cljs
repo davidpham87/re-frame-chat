@@ -120,7 +120,8 @@
      (when (seq caption)
        [:div {:class "message-text"
               :dangerouslySetInnerHTML {:__html caption}}])
-     [:img {:src image-url :style {:display :block :margin-top 15} :width 280}] ]]])
+     [:img {:src image-url :on-click #(.open js/window image-url)
+            :style {:display :block :margin-top 15 :margin-bottom 15} :width 480}] ]]])
 
 (def msg (r/atom nil))
 
