@@ -127,7 +127,8 @@ small {
   flex: 1;
   overflow-y: auto;
   padding: 16px 8px;
-  background-image: url(https://pixabay.com/get/54e4d5424e57a414f6d1867dda6d49214b6ac3e45657794172267cd39f/map-of-the-world-2401458_1920.jpg);
+  background-image: url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1980&q=80);
+  /* background-color: black; */
   background-position: center;
   background-size: cover;
 }
@@ -139,10 +140,11 @@ small {
   justify-content: flex-end;
 }
 .message.me {
-  padding: 0 0 0 10%;
+    padding: 0 0 0 10%;
 }
 .message.other {
   padding: 0 10% 0 0;
+  max-width: 480px;
   flex-direction: row-reverse;
   align-self: flex-start;
 }
@@ -150,11 +152,11 @@ small {
   margin: 24px 0 0;
 }
 .message .avatar {
-  align-self: flex-end;
-  margin: 0 8px 0 0;
+  align-self: flex-start;
+  margin: 5px 8px 0 0;
 }
 .message.other .avatar {
-  margin: 0 0 0 8px;
+  margin: 5px 0 0 8px;
 }
 .message-buble {
   display: flex;

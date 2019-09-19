@@ -70,11 +70,11 @@
      [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
     [:div {:class "message-text" :dangerouslySetInnerHTML {:__html text}}]]])
 
-(defmethod message "list"
-  [m _]
-  (message (assoc m :type "button")))
-
 (defmethod message "button"
+  [m _]
+  (message (assoc m :type "list")))
+
+(defmethod message "list"
   [{:keys [items avatar-src caption user time]} me?]
   [:<>
    [:div.message {:class "other"}
@@ -83,7 +83,8 @@
       [:div.message-buble
        [:div.message-meta
         [:div.message-user (str "@" user)]
-        [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
+        [:div.message-time (ctf/unparse (ctf/formatters :date-time)
+                                        (or time (ct/now)))]]
        [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]])]
    (for [m items]
      ^{:key (:text m)}
@@ -98,27 +99,28 @@
   [:<>
    [:div.message {:class "other"}
     [avatar {:src avatar-src}]
-    (when (seq caption)
-      [:div.message-buble
-       [:div.message-meta
-        [:div.message-user (str "@" user)]
-        [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-       [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]])
-    [:video {:style {:margin-top 15} :width 400 :controls true} [:source {:src video-url}]]]])
+    [:div.message-buble
+     [:div.message-meta
+      [:div.message-user (str "@" user)]
+      [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
+     (when (seq caption)
+       [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}])
+     [:video {:style {:margin-top 15} :width 400 :controls true}
+      [:source {:src video-url}]]]]])
 
 (defmethod message "image"
   [{:keys [items image-url caption avatar-src user time]} _]
   [:<>
    [:div.message {:class "other"}
     [avatar {:src avatar-src}]
-    (when (seq caption)
-         [:div.message-buble
-          [:div.message-meta
-           [:div.message-user (str "@" user)]
-           [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-          [:div {:class "message-text"
-                 :dangerouslySetInnerHTML {:__html caption}}]])
-    [:img {:src image-url :style {:display :block :margin-top 15} :width 280}]]])
+    [:div.message-buble
+     [:div.message-meta
+      [:div.message-user (str "@" user)]
+      [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
+     (when (seq caption)
+       [:div {:class "message-text"
+              :dangerouslySetInnerHTML {:__html caption}}])
+     [:img {:src image-url :style {:display :block :margin-top 15} :width 280}] ]]])
 
 (def msg (r/atom nil))
 
