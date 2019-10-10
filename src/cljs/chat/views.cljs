@@ -74,6 +74,16 @@
   [m _]
   (message (assoc m :type "list")))
 
+(defn message-meta [user time]
+  [:div.message-meta
+   [:div.message-user (str "@" user)]
+   [:div.message-time (ctf/unparse (ctf/formatters :date-time)
+                                   (or time (ct/now)))]])
+
+(defn message-caption [caption]
+  (when (seq caption)
+    [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]))
+
 (defmethod message "list"
   [{:keys [items avatar-src caption user time]} me?]
   [:<>
@@ -81,10 +91,7 @@
     [avatar {:src avatar-src}]
     (when (seq caption)
       [:div.message-buble
-       [:div.message-meta
-        [:div.message-user (str "@" user)]
-        [:div.message-time (ctf/unparse (ctf/formatters :date-time)
-                                        (or time (ct/now)))]]
+       [message-meta user time]
        [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}]])]
    (for [m items]
      ^{:key (:text m)}
@@ -100,12 +107,9 @@
    [:div.message {:class "other"}
     [avatar {:src avatar-src}]
     [:div.message-buble
-     [:div.message-meta
-      [:div.message-user (str "@" user)]
-      [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-     (when (seq caption)
-       [:div {:class "message-text" :dangerouslySetInnerHTML {:__html caption}}])
-     [:video {:style {:margin-top 15} :width 400 :controls true}
+     [message-meta user time]
+     [message-caption caption] 
+     [:video {:style {:margin-top 15} :width 480 :controls true}
       [:source {:src video-url}]]]]])
 
 (defmethod message "image"
@@ -114,13 +118,10 @@
    [:div.message {:class "other"}
     [avatar {:src avatar-src}]
     [:div.message-buble
-     [:div.message-meta
-      [:div.message-user (str "@" user)]
-      [:div.message-time (ctf/unparse (ctf/formatters :date-time) (or time (ct/now)))]]
-     (when (seq caption)
-       [:div {:class "message-text"
-              :dangerouslySetInnerHTML {:__html caption}}])
-     [:img {:src image-url :style {:display :block :margin-top 15} :width 280}] ]]])
+     [message-meta user time]
+     [message-caption caption]
+     [:img {:src image-url :on-click #(.open js/window image-url)
+            :style {:display :block :margin-top 15 :margin-bottom 15 :border-radius 5} :width 480}] ]]])
 
 (def msg (r/atom nil))
 
@@ -164,7 +165,6 @@
       [button {:class "btn"
                :on-click #(re-frame/dispatch [::events/send-message id @msg username])}
        [:i {:class ["fa fa-send"]}] "Send"]]]))
-
 
 (defn main-panel []
   (let [{:keys [id params]} @(re-frame/subscribe [::subs/route])]

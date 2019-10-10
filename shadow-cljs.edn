@@ -27,11 +27,8 @@
   [org.clojure/spec.alpha "0.2.176"]
   [org.clojure/core.match "0.3.0"]
   [proto-repl "0.3.1"]
-  [re-frame "0.10.6"]
-  [reagent "0.8.1"]
   [reagent-utils "0.3.3"]
-  [sablono "0.8.6"]
-  [secretary "1.2.3"]]
+  [sablono "0.8.6"]]
 
  :nrepl {:port 3333}
 
